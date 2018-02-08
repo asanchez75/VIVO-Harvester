@@ -4,28 +4,16 @@
 
 	<groupId>org.vivoweb</groupId>
 	<artifactId>harvester</artifactId>
-	<version>1.6-dev</version>
+	<version>1.6</version>
 	<packaging>jar</packaging>
 
 
 	<repositories>
-		<repository>
-			<releases>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>Maven Mirror</id>
-			<url>http://uk.maven.org/maven2</url>
-		</repository>
-		<repository>
-			<id>Jenabean</id>
-			<url>http://jenabean.googlecode.com/svn/repo</url>
-		</repository>
-		<repository>
-			<id>eulergui</id>
-			<url>http://eulergui.sourceforge.net/maven2</url>
-		</repository>
+            <repository>
+                <id>mvnrepository</id>
+                <name>mvnrepository</name>
+                <url>http://www.mvnrepository.com</url>
+            </repository>
 	</repositories>
 
 	<name>VIVOHarvester</name>
@@ -63,157 +51,22 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>jdeb</artifactId>
-				<groupId>org.vafer</groupId>
-				<version>0.8</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>jdeb</goal>
-						</goals>
-						<configuration>
-							<dataSet>
-								<data>
-									<src>${project.build.directory}/${project.build.finalName}.jar</src>
-									<type>file</type>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/bin</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.build.directory}/dependency</src>
-									<type>directory</type>
-									<!-- <includes/> -->
-									<excludes>**/*.svn*/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/bin/dependency</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.basedir}/bin</src>
-									<type>directory</type>
-									<!-- <includes/> -->
-									<excludes>**/*.svn*/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/bin</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.basedir}/vivo</src>
-									<type>directory</type>
-									<!-- <includes/> -->
-									<excludes>**/*.svn*/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/vivo</prefix>
-									</mapper>
-								</data>
-								<!-- <data>
-									<src>${project.basedir}/config</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/config</prefix>
-									</mapper>
-								</data>-->
-								<!-- <data>
-									<src>${project.basedir}/files</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/files</prefix>
-									</mapper>
-								</data> -->
-								<data>
-									<src>${project.basedir}/src/main/java/org/vivoweb/harvester/demo</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/demos</prefix>
-									</mapper>
-								</data>
-								<!-- <data>
-									<src>${project.basedir}/scripts</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/scripts</prefix>
-									</mapper>
-								</data>--> 
-								<data>
-									<src>${project.basedir}/example-datamaps</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**,**/data/**,**/previous-harvest/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/example-datamaps</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.basedir}/example-scripts/bash-scripts/full-harvest-examples</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**,**/data/**,**/previous-harvest/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/example-scripts</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.basedir}/lib</src>
-									<type>directory</type>
-									<excludes>**/*.svn*/**,**/*.git*/**</excludes>
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/lib</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.basedir}</src>
-									<type>directory</type>
-									<!-- <excludes>pom.xml,Changes.txt</excludes> -->
-									<includes>AUTHORS,CHANGELOG,INSTALL,LICENSE,README,THANKS</includes>
-									-->
-									<mapper>
-										<type>perm</type>
-										<prefix>/usr/share/vivo/harvester/docs</prefix>
-									</mapper>
-								</data>
-							</dataSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-                        <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>rpm-maven-plugin</artifactId> 
-				<version>2.1-alpha-1</version> <executions> <execution> <phase>package</phase> 
-				<goals> <goal>rpm</goal> </goals> </execution> </executions> <configuration> 
-				<copyright>2010, VIVO Harvester Team</copyright> <distribution>VIVO Release 
-				1.1</distribution> <group>Development</group> <packager>VIVO Harvester Team</packager> 
-				<prefix>/usr/share/vivo/harvester</prefix> <changelogFile>CHANGELOG</changelogFile> 
-				<defineStatements> <defineStatement>_unpackaged_files_terminate_build 0</defineStatement> 
-				</defineStatements> <mappings> <mapping> <directory>/usr/share/vivo/harvester/bin/</directory> 
-				<filemode>444</filemode> <sources> <source> <location>${project.build.directory}/${project.build.finalName}.jar</location> 
-				</source> </sources> </mapping> <mapping> <directory>/usr/share/vivo/harvester/bin/dependency</directory> 
-				<filemode>750</filemode> <sources> <source> <location>${project.build.directory}/dependency</location> 
-				</source> </sources> </mapping> <mapping> <directory>/usr/share/vivo/harvester/docs</directory> 
-				<documentation>true</documentation> <filemode>444</filemode> <sources> <source> 
-				<location>AUTHORS</location> </source> <source> <location>CHANGELOG</location> 
-				</source> <source> <location>INSTALL</location> </source> <source> <location>LICENSE</location> 
-				</source> <source> <location>README</location> </source> <source> <location>THANKS</location> 
-				</source> </sources> </mapping> <mapping> <directory>/usr/share/vivo/harvester/conf</directory> 
-				<configuration>true</configuration> <filemode>644</filemode> <sources> <source> 
-				<location>config</location> </source> </sources> </mapping> <mapping> <directory>/usr/share/vivo/harvester/scripts</directory> 
-				<filemode>644</filemode> <sources> <source> <location>scripts</location> 
-				</source> </sources> </mapping> </mappings> </configuration> </plugin> 
-                        -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
 		</plugins>
 		<resources>
 		</resources>
@@ -541,7 +394,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2</artifactId>
+			<artifactId>addressing</artifactId>
 			<version>1.5.4</version>
 			<type>pom</type>
 		</dependency>
@@ -552,34 +405,17 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>addressing</artifactId>
-			<version>1.5.4</version>
-			<type>mar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-corba</artifactId>
-			<version>1.5.4</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-fastinfoset</artifactId>
-			<version>1.5.4</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-integration</artifactId>
-			<version>1.5.4</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+<dependency>
+    <groupId>org.apache.axis2</groupId>
+    <artifactId>axis2-kernel</artifactId>
+    <version>1.5.4</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.axis2</groupId>
+    <artifactId>axis2-adb</artifactId>
+    <version>1.5.4</version>
+</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
